@@ -40,11 +40,17 @@ vim.keymap.set(
 )
 
 -- window navigation
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<c-h>", "<C-w>h", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<c-l>", "<C-w>l", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<c-j>", "<C-w>j", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<c-k>", "<C-w>k", { desc = "Move focus to the upper window" })
 
 -- references navigation
 vim.keymap.set("n", "<leader>ck", "<cmd>cnext<CR>zz", { desc = "Go to next reference" })
 vim.keymap.set("n", "<leader>cj", "<cmd>cprev<CR>zz", { desc = "Go to prev reference" })
+
+-- tmux
+vim.keymap.set("n", "<C-h>", ":TmuxNavigateLeft<CR>")
+vim.keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>")
+vim.keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>")
+vim.keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>")
