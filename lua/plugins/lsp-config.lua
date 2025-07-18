@@ -1,17 +1,22 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		config = function()
 			require("mason").setup()
 			vim.keymap.set("n", "<leader>cm", ":Mason<CR>", { desc = "Open Mason" })
 		end,
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
-		lazy = false,
-		opts = {
-			auto_install = true,
-		},
+		-- "williamboman/mason-lspconfig.nvim",
+		-- lazy = false,
+		-- opts = {
+		-- 	auto_install = true,
+		-- },
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+		-- dependencies = {
+		-- 	{ "mason-org/mason.nvim", opts = {} },
+		-- },
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -30,10 +35,12 @@ return {
 				require("cmp_nvim_lsp").default_capabilities()
 			)
 			--
-			require("mason-lspconfig").setup_handlers({
-				function(server)
-					lspconfig[server].setup({ capabilities = capabilities })
-				end,
+			require("mason-lspconfig").setup({
+				handlers = {
+					function(server)
+						lspconfig[server].setup({ capabilities = capabilities })
+					end,
+				},
 			})
 
 			---
@@ -45,6 +52,25 @@ return {
 							unknownAtRules = "igonre",
 						},
 					},
+				},
+			})
+
+			-- configure html server
+			function on_attach(client, bufnr)
+				-- don't format files, I prefer using prettier
+				client.server_capabilities.document_formatting = false
+				on_attach(client, bufnr)
+			end
+			lspconfig["html"].setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				init_options = {
+					configurationSection = { "html", "css", "javascript" },
+					embeddedLanguages = {
+						css = true,
+						javascript = true,
+					},
+					provideFormatter = true,
 				},
 			})
 			---
@@ -61,6 +87,15 @@ return {
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP Rename" })
 			vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "LSP Diagnostics" })
+			vim.keymap.set("n", "<leader>dn", function()
+				vim.diagnostic.goto_next()
+			end, { desc = "Jump to next diagnostics" })
+			vim.keymap.set("n", "<leader>dp", function()
+				vim.diagnostic.goto_prev()
+			end, { desc = "Jump to previous diagnostics" })
+			vim.keymap.set("i", "<C-h>", function()
+				vim.lsp.buf.signature_help()
+			end, { desc = "Show Signature Help " })
 		end,
 	},
 }
