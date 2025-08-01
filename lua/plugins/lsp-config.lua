@@ -56,23 +56,23 @@ return {
 			})
 
 			-- configure html server
-			function on_attach(client, bufnr)
-				-- don't format files, I prefer using prettier
-				client.server_capabilities.document_formatting = false
-				on_attach(client, bufnr)
-			end
-			lspconfig["html"].setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				init_options = {
-					configurationSection = { "html", "css", "javascript" },
-					embeddedLanguages = {
-						css = true,
-						javascript = true,
-					},
-					provideFormatter = true,
-				},
-			})
+			-- function on_attach(client, bufnr)
+			-- 	-- don't format files, I prefer using prettier
+			-- 	client.server_capabilities.document_formatting = false
+			-- 	on_attach(client, bufnr)
+			-- end
+			-- lspconfig["html"].setup({
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- 	init_options = {
+			-- 		configurationSection = { "html", "css", "javascript" },
+			-- 		embeddedLanguages = {
+			-- 			css = true,
+			-- 			javascript = true,
+			-- 		},
+			-- 		provideFormatter = true,
+			-- 	},
+			-- })
 			---
 			-- require("mason-lspconfig").setup_handlers({
 			-- require("mason-lspconfig").setup_handlers({
