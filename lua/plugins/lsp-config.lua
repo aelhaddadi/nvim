@@ -7,82 +7,38 @@ return {
 		end,
 	},
 	{
-		-- "williamboman/mason-lspconfig.nvim",
-		-- lazy = false,
-		-- opts = {
-		-- 	auto_install = true,
-		-- },
 		"mason-org/mason-lspconfig.nvim",
 		opts = {},
-		-- dependencies = {
-		-- 	{ "mason-org/mason.nvim", opts = {} },
-		-- },
 	},
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
-
-			-- lspconfig.lua_ls.setup({ capabilities = capabilities })
-			-- lspconfig.ts_ls.setup({ capabilities = capabilities })
-			-- lspconfig.angularls.setup({ capabilities = capabilities })
-			local lspconfig_defaults = lspconfig.util.default_config
-			lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-				"force",
-				lspconfig_defaults.capabilities,
-				require("cmp_nvim_lsp").default_capabilities()
-			)
-			--
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server)
-						lspconfig[server].setup({ capabilities = capabilities })
+						vim.lsp.config(server, { capabilities = capabilities })
 					end,
 				},
 			})
 
-			---
-			lspconfig.cssls.setup({
+			-- ignore css unknown tailwind rules
+			vim.lsp.config("cssls", {
 				settings = {
 					css = {
 						validate = true,
 						lint = {
-							unknownAtRules = "igonre",
+							unknownAtRules = "ignore",
 						},
 					},
 				},
 			})
 
-			-- configure html server
-			-- function on_attach(client, bufnr)
-			-- 	-- don't format files, I prefer using prettier
-			-- 	client.server_capabilities.document_formatting = false
-			-- 	on_attach(client, bufnr)
-			-- end
-			-- lspconfig["html"].setup({
-			-- 	capabilities = capabilities,
-			-- 	on_attach = on_attach,
-			-- 	init_options = {
-			-- 		configurationSection = { "html", "css", "javascript" },
-			-- 		embeddedLanguages = {
-			-- 			css = true,
-			-- 			javascript = true,
-			-- 		},
-			-- 		provideFormatter = true,
-			-- 	},
-			-- })
-			---
-			-- require("mason-lspconfig").setup_handlers({
-			-- require("mason-lspconfig").setup_handlers({
-			-- 	function(server)
-			-- 		lspconfig[server].setup({})
-			-- 	end,
-			-- })
+			-- lsp keymaps
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Definition" })
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Format" })
-			vim.keymap.set("n", "<leader>cr", vim.lsp.buf.references, { desc = "Show References" })
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+			vim.keymap.set("n", "<leader>cr", vim.lsp.buf.references, { desc = "Show Code References" })
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP Rename" })

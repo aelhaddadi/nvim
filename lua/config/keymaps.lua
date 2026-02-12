@@ -54,3 +54,11 @@ vim.keymap.set("n", "<C-h>", ":TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>")
 vim.keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>")
 vim.keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>")
+
+-- flutter
+vim.keymap.set("n", "<leader>fc", function()
+	require("telescope").extensions.flutter.commands()
+end, { desc = "Flutter commands" })
+vim.keymap.set("n", "<leader>fl", "<cmd>FlutterLogToggle<CR>", { desc = "Toggle Flutter Dev Log" })
+vim.keymap.set("n", "<leader>pr", "<cmd>FlutterReload<CR>", { desc = "Flutter Project Hot Reload" })
+vim.keymap.set("n", "<leader>pR", "<cmd>FlutterRestart<CR>", { desc = "Flutter Project Hot Restart" })

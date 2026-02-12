@@ -39,6 +39,18 @@ return {
 				':lua require("harpoon.ui").nav_file(4)<CR>',
 				{ desc = "Mark File - Harpoon" }
 			),
+			vim.keymap.set(
+				"n",
+				"<leader>5",
+				':lua require("harpoon.ui").nav_file(5)<CR>',
+				{ desc = "Mark File - Harpoon" }
+			),
+			vim.keymap.set(
+				"n",
+				"<leader>6",
+				':lua require("harpoon.ui").nav_file(6)<CR>',
+				{ desc = "Mark File - Harpoon" }
+			),
 		})
 	end,
 }
