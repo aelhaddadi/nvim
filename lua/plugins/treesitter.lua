@@ -1,13 +1,9 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
+	"romus204/tree-sitter-manager.nvim",
+	dependencies = {},
 	config = function()
-		local configs = require("nvim-treesitter.configs")
-
-		configs.setup({
+		require("tree-sitter-manager").setup({
 			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = true },
 		})
 	end,
 }
