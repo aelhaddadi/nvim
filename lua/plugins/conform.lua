@@ -56,11 +56,11 @@ return {
 			-- python = { "isort", "black" },
 			--
 			-- You can use 'stop_after_first' to run the first available formatter from the list
-			javascript = { "prettier" },
-			html = { "prettier" },
-			typescript = { "prettier" },
-			css = { "prettier" },
-			json = { "prettier" },
+			javascript = { "biome" },
+			html = { "biome" },
+			typescript = { "biome" },
+			css = { "biome" },
+			json = { "biome" },
 			c = { "clang-format" },
 		},
 	},
