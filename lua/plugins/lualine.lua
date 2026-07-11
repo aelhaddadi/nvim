@@ -15,6 +15,8 @@ return {
 					winbar = { "neo-tree" },
 				},
 				always_show_tabline = false,
+				globalstatus = true,
+				ignore_focus = { "neo-tree" },
 			},
 
 			sections = {

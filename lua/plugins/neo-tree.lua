@@ -5,6 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
+		"3rd/image.nvim",
 	},
 	config = function()
 		require("neo-tree").setup({
@@ -25,6 +26,7 @@ return {
 				},
 			},
 		})
+		require("image").setup({})
 		vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Open File Explore" })
 	end,
 }
